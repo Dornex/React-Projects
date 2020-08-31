@@ -6,15 +6,21 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const trackRoutes = require("./routes/trackRoutes");
 const requireAuth = require("./middlewares/requireAuth");
+const cors = require("cors");
 
 const app = express();
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
 const mongoUri =
-  "mongodb+srv://admin:passwordpassword@cluster0.5rffx.mongodb.net/<dbname>?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin123@cluster0.bkwni.mongodb.net/<dbname>?retryWrites=true&w=majority";
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -32,6 +38,6 @@ app.get("/", requireAuth, (req, res) => {
   res.send(`Your email: ${req.user.email}`);
 });
 
-app.listen(3000, () => {
-  console.log("Listening on 3000!");
+app.listen(3001, () => {
+  console.log("Listening on 3001!");
 });
