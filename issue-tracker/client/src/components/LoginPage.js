@@ -3,13 +3,8 @@ import { connect } from "react-redux";
 import { signInNode } from "../actions";
 import AuthForm from "./forms/AuthForm";
 import { Link } from "react-router-dom";
-import history from "../history";
 
 class LoginPage extends React.Component {
-  componentDidMount() {
-    console.log(history);
-  }
-
   onSubmit = (formProps) => {
     this.props.signInNode(formProps);
   };

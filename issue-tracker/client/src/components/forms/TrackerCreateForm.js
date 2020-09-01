@@ -1,8 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { connect } from "react-redux";
 
-class AuthForm extends React.Component {
+class TrackerCreateForm extends React.Component {
   renderError = ({ error, touched }) => {
     if (touched && error) {
       return (
@@ -11,14 +10,6 @@ class AuthForm extends React.Component {
         </div>
       );
     }
-  };
-
-  renderPostAuthError = (error) => {
-    return (
-      <div className="ui error message">
-        <div className="header">{error}</div>
-      </div>
-    );
   };
 
   renderInput = ({ input, label, meta, type }) => {
@@ -40,23 +31,14 @@ class AuthForm extends React.Component {
   render() {
     return (
       <>
-        {this.props.authError
-          ? this.renderPostAuthError(this.props.authError)
-          : null}
         <form
           className="ui form error"
           onSubmit={this.props.handleSubmit(this.onSubmit)}
         >
           <Field
-            name="username"
+            name="name"
             component={this.renderInput}
-            label="Enter username"
-          />
-          <Field
-            name="password"
-            component={this.renderInput}
-            label="Enter password"
-            type="password"
+            label="Enter issue tracker name"
           />
           <button className="ui button primary">Submit</button>
         </form>
@@ -68,11 +50,8 @@ class AuthForm extends React.Component {
 const validate = (formValues) => {
   const errors = {};
 
-  if (!formValues.username) {
-    errors.username = "You must enter a username!";
-  }
-  if (!formValues.password) {
-    errors.password = "You must enter a password!";
+  if (!formValues.name) {
+    errors.name = "You must enter a issue tracker name!";
   }
 
   return errors;
@@ -84,9 +63,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const authForm = reduxForm({
-  form: "authForm",
+export default reduxForm({
+  form: "createForm",
   validate,
-})(AuthForm);
-
-export default connect(mapStateToProps)(authForm);
+})(TrackerCreateForm);

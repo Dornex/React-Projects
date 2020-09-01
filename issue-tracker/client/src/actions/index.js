@@ -1,5 +1,6 @@
 import history from "../history";
 import auth from "../apis/auth";
+import tracker from "../apis/tracker";
 
 export const signIn = () => {
   return {
@@ -14,14 +15,23 @@ export const signOut = () => (dispatch) => {
 };
 
 export const signInNode = (formValues) => async (dispatch) => {
-  const response = await auth.post("/signin", { ...formValues });
-  console.log(response.data);
-  localStorage.setItem("token", response.data.token);
-  dispatch({ type: "SIGN_IN" });
-  history.push("/");
+  try {
+    const response = await auth.post("/signin", { ...formValues });
+    localStorage.setItem("token", response.data.token);
+    dispatch({ type: "SIGN_IN" });
+    history.push("/");
+  } catch (err) {
+    const errorMessage = err.response.data.error;
+    dispatch({ type: "SIGN_IN_ERROR", payload: errorMessage });
+  }
 };
 
-export const registerUser = (formValues) => async (dispatch, getState) => {
+export const registerUser = (formValues) => async () => {
   await auth.post("signup", { ...formValues });
   history.push("/login");
+};
+
+export const createTrack = (formValues) => async (dispatch) => {
+  const response = tracker.post("/trackers", formValues);
+  // history.push("/");
 };

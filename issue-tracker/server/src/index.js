@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
-const trackRoutes = require("./routes/trackRoutes");
+const trackerRoutes = require("./routes/trackerRoutes");
 const requireAuth = require("./middlewares/requireAuth");
 const cors = require("cors");
 
@@ -17,7 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(authRoutes);
-app.use(trackRoutes);
+app.use(trackerRoutes);
 
 const mongoUri =
   "mongodb+srv://admin:admin123@cluster0.bkwni.mongodb.net/<dbname>?retryWrites=true&w=majority";

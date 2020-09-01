@@ -6,6 +6,7 @@ import TrackerList from "./trackers/TrackerList";
 import { PrivateRoute } from "./PrivateRoute";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import TrackerCreate from "./trackers/TrackerCreate";
 
 class App extends React.Component {
   render() {
@@ -16,6 +17,11 @@ class App extends React.Component {
             <Header />
             <Switch>
               <PrivateRoute path="/" exact component={TrackerList} />
+              <PrivateRoute
+                path="/tracker/new"
+                exact
+                component={TrackerCreate}
+              />
               <Route path="/login" exact component={LoginPage} />
               <Route path="/register" exact component={RegisterPage} />
             </Switch>

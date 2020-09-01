@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="ui secondary pointing menu">
       <Link to="/" className="item">
-        Issues Tracker
+        Issue Tracker
       </Link>
       <div className="right menu">
         <Link to="/" className="item">

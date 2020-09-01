@@ -67,6 +67,8 @@ const validate = (formValues) => {
   }
   if (!formValues.password) {
     errors.password = "You must enter a password!";
+  } else if (formValues.password.length < 6) {
+    errors.password = "Password length must be greater than 6";
   }
   if (!formValues.confirmPassword) {
     errors.confirmPassword = "You must enter a password!";
